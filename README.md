@@ -169,3 +169,22 @@ Firestore latency times are not guaranteed and can be 10-20x slower than regular
 #### Supabase
 Supabase Realtime latency has the potential to have much lower latency for time-sensitive applications, although at this time there are also no strict guarantees.
 
+## Document Database vs. Relational Database
+### Typical Business Requirements
+- Some applications need to store blocks of unstructured data or data with a variable structure, or deeply nested data.
+
+#### Firestore
+Firestore is, by nature, a document database, so it excels at storing document-based data such as JSON data.  However, there are some limitations to how document data can be stored in or retrieved from a Firestore database.
+
+##### Collection -> Document -> Collection -> Document
+While Firestore does support subcollections, all data in Firestore must adhere to a pattern where a collection must contain documents, and a document can contain a collection, which can contain other documents, one of which can have a sub-collection, and so on.  A document can't have a sub-document, nor can a collection have a sub-collection.
+
+Firestore cannot index data deeply nested in a document so it's usually advised that you split things up into sub-collections and index those individually.  This can get complex and difficult when modeling certain data structures that have variable levels of nesting.
+
+#### Supabase
+While supbase is based on a relational database (PostgreSQL), its support for JSON (document) data is very powerful and easy to use.  Any PostgreSQL table can have any number of JSON fields which can contain any valid JSON data.
+
+Data inside JSON fields can be indexed just like any other type of field, no matter how deeply nested.  JSON fields can contain objects, string data, numeric data, arrays, and can be nested to any level needed.  This brings all the power of document databases to a relational database, with complete indexing and retrieval capabilities.
+
+
+
