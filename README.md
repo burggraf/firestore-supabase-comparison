@@ -61,14 +61,14 @@ Supabase (PostgreSQL) allows single records (documents) up to 1.6TB (terrabytes)
 - Show me our top customers along with information about the trade association to which they belong
 
 #### Firestore
-Firestore's query capablities are quite limited in comparison to standard SQL.  Some of these limitations are:
+Firestore's query capabilities are quite limited in comparison to standard SQL.  Some of these limitations are:
 
 - Only one range component per query
 - No negation operators (no "NOT" or "NOT IN")
-- Limited "OR" capablities
+- Limited "OR" capabilities
 - No joins or related data (the query must be split or a sub-query must be executed for each document retrieval)
 
-Due to these limitations, a query such as "Select all single-family homes that have 4-6 bedrooms and are priced between $1,000,000 and $1,250,000" can't be peformed.  You'd need to pull all the data that satified one of the requirements and then filter that set of data on the client, or use some other similar workaround.
+Due to these limitations, a query such as "Select all single-family homes that have 4-6 bedrooms and are priced between $1,000,000 and $1,250,000" can't be performed.  You'd need to pull all the data that satisfied one of the requirements and then filter that set of data on the client, or use some other similar workaround.
 
 This makes basic geo-data queries impossible, because a simple bounding box query would require two ranges (low and high latitude range and low and high longitude range).
 
@@ -77,7 +77,7 @@ Supabase has all the power of PostgreSQL query capabilities, along with a rich s
 
 ## Query Optimization
 ### Typical Business Requirements
-- Allow a user to search for records based based on a large set of (optional) criteria
+- Allow a user to search for records based on a large set of (optional) criteria
 - Show me houses that are in my price range, have at least 3 bathrooms, have a pool, and are in one of the top school districts in the county
 
 A good example of this is a real estate application where a user is allowed to search based on any combinations of dozens of fields.  There may be millions of possible search queries based on what a user is specifically looking for.
@@ -94,9 +94,9 @@ By default, Firestore indexes every individual field in every document automatic
 When Firebase senses that a query needs optimization, it will:
 
 1. fail with an error message (so you don't get a result)
-2. generate a URL in the erorr message you can click to create the required index in your database
+2. generate a URL in the error message you can click to create the required index in your database
 
-While it's convenient to get an auto-generated link to create the required indexes you need, is the error console the right place to be doing database optimization?  And if you have a few dozen index combinatinos to be indexed, do you really want to use a client application to iterate through those combinations, generate error messages for each one, then click on links individually to build indexes?
+While it's convenient to get an auto-generated link to create the required indexes you need, is the error console the right place to be doing database optimization?  And if you have a few dozen index combinations to be indexed, do you really want to use a client application to iterate through those combinations, generate error messages for each one, then click on links individually to build indexes?
 
 ##### Index limits per collection
 Firestore has a limit of 200 "composite" indexes per collection.  So even if you do start creating indexes for each combination of search criteria, you'll hit this limit pretty quickly.
@@ -125,7 +125,7 @@ In addition, Supabase maintains its own backups of your data, and depending on y
 - Validate data that's entered so invalid data can't be stored in the database
 
 #### Firebase
-Firebase a limited security and validation capability based on it's own new, proprietary language
+Firebase a limited security and validation capability based on its own new, proprietary language
 
 - This is a new language for your developers to learn and has no applicable use outside of Firestore
 - The language has no complex functional capabilities
@@ -139,7 +139,7 @@ Supabase uses Postgresql RLS (Row Level Security) for security and validation.
 
 ## Data Duplication Model
 ### Typical Business Requirements
-- Customers may have hundreds of invoices, each of which have hundrends of line items
+- Customers may have hundreds of invoices, each of which have hundreds of line items
 - Each client has one or more portfolios of work, and each portfolio has many individual projects
 
 #### Firestore
